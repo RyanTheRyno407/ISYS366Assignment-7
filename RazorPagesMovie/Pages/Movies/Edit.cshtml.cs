@@ -15,11 +15,12 @@ namespace RazorPagesMovie.Pages.Movies
     public class EditModel : PageModel
     {
         private readonly RazorPagesMovie.Data.RazorPagesMovieContext _context;
+        private readonly IMovieRepo _movieRepo;
         private readonly IWebHostEnvironment _env;
 
-        public EditModel(RazorPagesMovie.Data.RazorPagesMovieContext context, IWebHostEnvironment env)
+        public EditModel(IMovieRepo movieRepo, IWebHostEnvironment env)
         {
-            _context = context;
+            _movieRepo = movieRepo;
             _env = env;
 
         }
@@ -30,17 +31,17 @@ namespace RazorPagesMovie.Pages.Movies
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Movie == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var movie =  await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
+            var movie =  await _movieRepo.GetByIdAsync(id.Value);
             if (movie == null)
             {
                 return NotFound();
             }
-            Movie = movie;
+            Movie = (Movie)movie;
             return Page();
         }
 
@@ -62,7 +63,7 @@ namespace RazorPagesMovie.Pages.Movies
             else
             {
                 // preserve existing image uri when no new file uploaded
-                var existing = await _context.Movie.AsNoTracking().FirstOrDefaultAsync(m => m.Id == Movie.Id);
+                var existing = await _movieRepo.GetByIdAsync(Movie.Id);
                 if (existing != null)
                 {
                     Movie.Image = existing.Image;
@@ -73,7 +74,7 @@ namespace RazorPagesMovie.Pages.Movies
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _movieRepo.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {

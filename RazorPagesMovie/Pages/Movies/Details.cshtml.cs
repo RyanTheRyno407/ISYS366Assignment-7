@@ -12,32 +12,19 @@ namespace RazorPagesMovie.Pages.Movies
 {
     public class DetailsModel : PageModel
     {
-        private readonly RazorPagesMovie.Data.RazorPagesMovieContext _context;
+        private readonly IMovieRepo _movieRepo;
 
-        public DetailsModel(RazorPagesMovie.Data.RazorPagesMovieContext context)
+        public IEnumerable<Movie> Movie { get; set; } = default!;
+
+        public DetailsModel(IMovieRepo movieRepo)
         {
-            _context = context;
+            _movieRepo = movieRepo;
         }
-
-        public Movie Movie { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (movie is not null)
-            {
-                Movie = movie;
-
-                return Page();
-            }
-
-            return NotFound();
+            Movie = await _movieRepo.GetAllAsync(id);
+            return Page();
         }
     }
 }

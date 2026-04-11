@@ -8,18 +8,19 @@ namespace RazorPagesMovie.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly RazorPagesMovieContext _context;
+        private readonly IMovieRepo _movieRepo;
 
-        public IndexModel(RazorPagesMovieContext context)
+        public IEnumerable<Movie> Movie { get; set; } = default!;
+
+        public IndexModel(IMovieRepo movieRepo)
         {
-            _context = context;
+            _movieRepo = movieRepo;
         }
 
-        public IList<Movie> Movie { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async void OnGetAsync()
         {
-            Movie = await _context.Movie.OrderBy(m => m.Rank).ThenBy(m => m.Title).ToListAsync();
+            Movie = await _movieRepo.GetAllAsync();
         }
     }
 }

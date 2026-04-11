@@ -26,6 +26,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<RazorPagesMovieContext>();
 
+builder.Services.AddScoped<IMovieRepo, MovieRepoEF>();
+//builder.Services.AddSingleton<IMovieRepo, MovieRepoList>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())

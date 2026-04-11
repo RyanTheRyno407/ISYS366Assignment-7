@@ -15,12 +15,12 @@ namespace RazorPagesMovie.Pages.Movies
     public class CreateModel : PageModel
     {
         private readonly RazorPagesMovie.Data.RazorPagesMovieContext _context;
-
+        private readonly IMovieRepo _movieRepo;
         private readonly IWebHostEnvironment _env;
 
-        public CreateModel(RazorPagesMovie.Data.RazorPagesMovieContext context,IWebHostEnvironment env)
+        public CreateModel(IMovieRepo movieRepo,IWebHostEnvironment env)
         {
-            _context = context;
+            _movieRepo = movieRepo;
             _env = env;
             
         }
@@ -51,8 +51,8 @@ namespace RazorPagesMovie.Pages.Movies
             }
 
 
-            _context.Movie.Add(Movie);
-            await _context.SaveChangesAsync();
+           
+            await _movieRepo.AddAsync(Movie);
 
             return RedirectToPage("./Index");
         }
