@@ -6,7 +6,7 @@
 }
 
 <h1>Index
-    <link rel="stylesheet" type="text/css" href="/css/Thumbnail.css" />
+    <link rel="stylesheet" type="text/css" href="/css/Thumbnail.css"/>
 </h1>
 
 <p>
@@ -19,7 +19,7 @@
             <option value="">All</option>
         </select>
         <label>Title: <input type="text" asp-for="SearchString" /></label>
-        <input type="submit" value="Filter" />
+        <input type="submit" value="Filter"/>
     </p>
 </form>
 
@@ -27,22 +27,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(Model => Model.Movie[0].Image)
+                @Html.DisplayNameFor(model => model.Movie.Image)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Title)
+                @Html.DisplayNameFor(model => model.Movie.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].ReleaseDate)
+                @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Genre)
+                @Html.DisplayNameFor(model => model.Movie.Genre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Price)
+                @Html.DisplayNameFor(model => model.Movie.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Rank)
+                @Html.DisplayNameFor(model => model.Movie.Rank)
             </th>
             <th></th>
         </tr>

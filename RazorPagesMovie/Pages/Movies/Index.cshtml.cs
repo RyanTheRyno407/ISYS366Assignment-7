@@ -16,7 +16,7 @@ namespace RazorPagesMovie.Pages.Movies
     {
         private readonly IMovieRepo _movieRepo;
 
-        public IEnumerable<Movie> Movie { get; set; } = default!;
+        public IList<Movie> Movie { get; set; } = default!;
 
         public IndexModel(IMovieRepo movieRepo)
         {
