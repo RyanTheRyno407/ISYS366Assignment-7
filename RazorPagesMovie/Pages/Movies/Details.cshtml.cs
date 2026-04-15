@@ -14,7 +14,7 @@ namespace RazorPagesMovie.Pages.Movies
     {
         private readonly IMovieRepo _movieRepo;
 
-        public IEnumerable<Movie> Movie { get; set; } = default!;
+        public Movie Movie { get; set; } = default!;
 
         public DetailsModel(IMovieRepo movieRepo)
         {
@@ -23,7 +23,7 @@ namespace RazorPagesMovie.Pages.Movies
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            Movie = await _movieRepo.GetAllAsync(id);
+            Movie = await _movieRepo.GetByIdAsync(id);
             return Page();
         }
     }
