@@ -22,8 +22,16 @@
                         @movie.Price
                     </div> <!--end of price-->
                 </div> 
-            </div>
-    }
+            </div> <!--end of header-->
+
+                <div class="card-body">
+                    <img src="@movie.Image" class="card-img my-thumbnail-class" alt="@movie.Title">
+                </div> <!--end of image-->
+                <div class="card-body">
+                    <p>@movie.ReleaseDate.ToString("yyyy-MM-dd")</p>
+                    <p>@movie.Genre</p>
+                </div><!--end of date and genre-->
+    
 
 
             <div class="card-body col-4">
@@ -33,4 +41,4 @@
         
     </div>
 }
-</div>
+
