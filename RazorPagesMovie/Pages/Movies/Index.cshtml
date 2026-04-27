@@ -22,12 +22,12 @@
         <input type="submit" value="Filter"/>
     </p>
 </form>
-
+@for(int i = 0; i < Model.Movie.Count; i++)
+            {
 <table class="table">
     <thead>
         <tr>
-           @for(int i = 0; i < Model.Movie.Count; i++)
-            {
+           
                 <th>
                     @Html.DisplayNameFor(model => model.Movie[i].Image)
                 </th>
@@ -46,29 +46,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Movie[i].Rank)
                 </th>
-            } 
-            @*<th>
-                @Html.DisplayNameFor(model => model.Movie.Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie.Rank)
-            </th> *@
+            
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Movie) {
+        @foreach (var item in Model.Movie) {
         <tr>
             <td>
                     @if (!string.IsNullOrEmpty(item.Image))
@@ -100,3 +82,4 @@
 }
     </tbody>
 </table>
+}
